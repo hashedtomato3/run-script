@@ -1,0 +1,38 @@
+{
+  "version": "1.0.0",
+  "exported": "2024-02-21T00:00:00.000Z",
+  "webConfigUrl": "https://example.com/config.json",
+  "embedBaseUrl": "https://example.com?q=",
+  "scripts": {
+    "example_console_logger": {
+      "name": "Console Logger",
+      "code": "console.log('Page loaded at:', new Date().toISOString());",
+      "executionMode": "manual",
+      "urlPattern": "",
+      "executionContext": "MAIN",
+      "disabled": false,
+      "createdAt": "2024-02-21T00:00:00.000Z",
+      "updatedAt": "2024-02-21T00:00:00.000Z"
+    },
+    "example_dark_mode": {
+      "name": "Dark Mode Toggle",
+      "code": "// Simple dark mode toggle\nconst style = document.createElement('style');\nstyle.textContent = `\n  html { filter: invert(1) hue-rotate(180deg) !important; }\n  img, video { filter: invert(1) hue-rotate(180deg) !important; }\n`;\ndocument.head.appendChild(style);",
+      "executionMode": "both",
+      "urlPattern": "*",
+      "executionContext": "MAIN",
+      "disabled": true,
+      "createdAt": "2024-02-21T00:00:00.000Z",
+      "updatedAt": "2024-02-21T00:00:00.000Z"
+    },
+    "example_page_info": {
+      "name": "Show Page Info",
+      "code": "const info = {\n  url: window.location.href,\n  title: document.title,\n  headings: document.querySelectorAll('h1, h2, h3').length,\n  links: document.querySelectorAll('a').length,\n  images: document.querySelectorAll('img').length\n};\nconsole.table(info);",
+      "executionMode": "manual",
+      "urlPattern": "",
+      "executionContext": "MAIN",
+      "disabled": false,
+      "createdAt": "2024-02-21T00:00:00.000Z",
+      "updatedAt": "2024-02-21T00:00:00.000Z"
+    }
+  }
+}
