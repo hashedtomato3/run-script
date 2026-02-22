@@ -1,13 +1,14 @@
 {
   "manifest_version": 3,
   "name": "Run Script",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An extension that injects arbitrary user scripts into websites",
   "permissions": [
     "scripting",
     "storage",
     "activeTab",
-    "tabs"
+    "tabs",
+    "notifications"
   ],
   "host_permissions": [
     "<all_urls>"

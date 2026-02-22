@@ -37,14 +37,14 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     const base = url.origin + url.pathname;
     const configParam = url.searchParams.get('q');
     const result = await chrome.storage.sync.get('embedBaseUrl');
-    console.log(result, configParam, base, result);
+    const url2 = new URL(result.embedBaseUrl);
+    const base2 = url2.origin + url2.pathname;
+    //console.log("tab navigation completed", base, base2, configParam);
     
-    if (configParam && base === result.embedBaseUrl) {
+    if (configParam && base === base2) {
       try {
-        // Decode from base64
-        const configStr = atob(configParam);
-        const config = JSON.parse(configStr);
-        console.log(config, configStr);
+        const config = JSON.parse(configParam);
+        console.log("decoded from embedded URL", configParam);
 
         // Load the configuration
         const result = await chrome.storage.local.get('scripts');
@@ -65,6 +65,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
         
         // Notify user (could be a toast or sync icon)
         console.log('Configuration loaded from embedded URL');
+        chrome.notifications.create({ type: "basic", iconUrl: "images/icon-48.png", title: "Run Script", message: "Configuration loaded from embedded URL" });
       } catch (error) {
         console.error('Failed to parse embedded configuration:', error);
       }
@@ -103,7 +104,7 @@ async function injectAutomaticScriptsForTab(tabId, tabUrl) {
         await chrome.scripting.executeScript({
           target,
           world: 'ISOLATED',
-          func: (code) => { eval(code); },
+          func: (code) => { eval(code); },  // this must result in error!!
           args: [script.code]
         });
       } else {

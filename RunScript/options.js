@@ -432,7 +432,7 @@ async function generateEmbedUrl() {
   try {
     // Encode configuration as base64 to avoid URL length issues
     const configStr = JSON.stringify(config);
-    const encoded = btoa(configStr);
+    //const encoded = atob(configStr);
     
     const embedBaseUrl = document.getElementById('embedBaseUrl').value.trim();
     if (!embedBaseUrl) {
@@ -440,7 +440,8 @@ async function generateEmbedUrl() {
       return;
     }
 
-    const fullUrl = embedBaseUrl + encodeURIComponent(encoded);
+    const fullUrl = embedBaseUrl + '?q=' + encodeURIComponent(configStr);
+    console.log("encoded:", fullUrl);
     document.getElementById('embedFullUrl').value = fullUrl;
     
     showEmbedStatus('success', 'Embed URL generated successfully');
