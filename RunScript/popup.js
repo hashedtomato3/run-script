@@ -53,18 +53,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             await chrome.scripting.executeScript({
               target: { tabId: tab.id },
               func: (code) => {eval(code)},
-            //   func: (code) => {
-            //     const script = document.createElement('script');
-            //     script.textContent = code;
-            //     script.onload = () => script.remove();
-            //     (document.head || document.documentElement).appendChild(script);
-            //   },
+              // func: (code) => {
+              //   const script = document.createElement('script');
+              //   script.textContent = code;
+              //   script.onload = () => script.remove();
+              //   (document.head || document.documentElement).appendChild(script);
+              // },
               args: [script.code],
               world: 'MAIN'
             });
           }
 
           console.log(`Executed script: ${script.name}`);
+          window.close();
         } catch (error) {
           console.error(`Error executing script: ${error.message}`);
         }

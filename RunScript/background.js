@@ -37,7 +37,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     const base = url.origin + url.pathname;
     const configParam = url.searchParams.get('q');
     const result = await chrome.storage.sync.get('embedBaseUrl');
-    const url2 = new URL(result.embedBaseUrl);
+    const url2 = new URL(result?.embedBaseUrl || "http://dummy");
     const base2 = url2.origin + url2.pathname;
     //console.log("tab navigation completed", base, base2, configParam);
     
